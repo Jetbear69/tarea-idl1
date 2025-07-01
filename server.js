@@ -58,7 +58,9 @@ app.get("/informe_excel", (req, res) => {
   sheet.setCell('I1', -3);
   sheet.setCell('I2', 3.1415922653589);
   sheet.setCell('G102', 'Hello World!');
-  
+  res.setHeader('Content-Disposition', 'attachment; filename="generated_document_xlsx"');
+  res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document');
+  xlsx.generate(res);
 });
 
 app.get("/informe_pdf", (req, res) => {
