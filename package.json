@@ -1,5 +1,5 @@
 {
-  "name": "glitch-mvp-node",
+  "name": "Holamundo-express",
   "version": "0.1.0",
   "description": "A simple Node app built on fastify, instantly up and running.",
   "main": "server.js",
@@ -7,6 +7,7 @@
     "start": "node server.js"
   },
   "dependencies": {
+    "express": "^4.x",
     "fastify": "^4.21.0",
     "handlebars": "^4.7.8",
     "@fastify/view": "^8.0.0",
