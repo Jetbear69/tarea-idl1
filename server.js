@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const officegen = require("officegen");
+const PDFDocument = require("pdfkit");
 const path = require("path");
 
 
@@ -64,7 +65,13 @@ app.get("/informe_excel", (req, res) => {
 });
 
 app.get("/informe_pdf", (req, res) => {
-  
+  const doc = new PDFDocument();
+  res.setHeader('Content-Type', 'application/pdf');
+  res.setHeader('Content-Disposition', 'attachment; filename="generated_document_pdf"');
+  doc.pipe(res);
+  doc.fontSize(25).text('Hello from PDFKIT!', 100, 100);
+  doc.text('This is a dynamically generated PDF.', {align: 'center'});
+  doc.end();
 });
 
 app.listen(process.env.PORT, () => {
