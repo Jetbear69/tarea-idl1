@@ -5,13 +5,18 @@ app.get("/", (req, res) => {
 });
 
 const fnHealth = (req, res) => {
-  res.send("OK");
+  res.send("<h1>OK</h1> <strong>funciona!</strong>");
 }
 
 app.get("/health", fnHealth);
 
 app.get("/status", (req, res) => {
-  
+  res.json(
+    {
+      "id": 12,
+      "status": "Registrado"
+    }
+  );
 });
 
 app.listen(process.env.PORT, () => {
