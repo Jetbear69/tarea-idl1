@@ -19,6 +19,24 @@ app.get("/status", (req, res) => {
   );
 });
 
+app.get("/formato", (req, res) => {
+  let xml = "<respuesta><id>34</id><estado>Registrado</estado></respuesta>".trim();
+  res.set("Content-Type", "application/xml");
+  res.send(xml);
+});
+
+app.get("/informe_word", (req, res) => {
+  
+});
+
+app.get("/informe_excel", (req, res) => {
+  
+});
+
+app.get("/informe_pdf", (req, res) => {
+  
+});
+
 app.listen(process.env.PORT, () => {
   console.log("El proyecto Express funciona!");
 });
