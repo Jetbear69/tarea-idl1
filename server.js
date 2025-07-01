@@ -39,10 +39,25 @@ app.get("/informe_word", (req, res) => {
   });
   let pObj = docx.createP();
   pObj.addText("This document was generated on the fly!");
-  res.setHeader('Content-Disposition', 'attachment; filename=');
+  res.setHeader('Content-Disposition', 'attachment; filename="generated_document_docx"');
+  res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document');
+  docx.generate(res);
 });
 
 app.get("/informe_excel", (req, res) => {
+  let xlsx = officegen({type: 'xlsx'});
+  xlsx.on('finalize', function(written){
+    console.log("Finished creating XLSX file");
+  });
+  xlsx.on('error', function(err){
+    console.log(err);
+  });
+  let sheet = xlsx.makeNewSheet();
+  sheet.name = 'Officegen Excel';
+  sheet.setCell('E7', 42);
+  sheet.setCell('I1', -3);
+  sheet.setCell('I2', 3.1415922653589);
+  sheet.setCell('G102', 'Hello World!');
   
 });
 
