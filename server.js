@@ -10,6 +10,10 @@ const fnHealth = (req, res) => {
 
 app.get("/health", fnHealth);
 
+app.get("/status", (req, res) => {
+  
+});
+
 app.listen(process.env.PORT, () => {
   console.log("El proyecto Express funciona!");
 });
