@@ -1,5 +1,9 @@
 const express = require("express");
 const app = express();
+const officegen = require("officegen");
+const path = require("path");
+
+
 app.get("/", (req, res) => {
   res.send("Hola Mundo");
 });
@@ -26,7 +30,16 @@ app.get("/formato", (req, res) => {
 });
 
 app.get("/informe_word", (req, res) => {
-  
+  let docx = officegen({type: 'docx'});
+  docx.on('finalize', function(written){
+    console.log("Finished creating DOCX file");
+  });
+  docx.on('error', function(err){
+    console.log(err);
+  });
+  let pObj = docx.createP();
+  pObj.addText("This document was generated on the fly!");
+  res.setHeader('Content-Disposition', 'attachment; filename=');
 });
 
 app.get("/informe_excel", (req, res) => {
