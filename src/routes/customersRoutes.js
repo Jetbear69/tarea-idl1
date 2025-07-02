@@ -1,6 +1,8 @@
 const express = require("express");
-
+const bodyParser = require("body-parser");
 const router = express.Router();
+
+app.use(bodyParser.urlencoded({ extended: true }));
 
 let customers = [
   { id: 1, firstName: 'RICARDO GERMAN', lastName: 'AGIP RUBIO', documentType: 'DNI', documentNumber: '27440013' },
@@ -11,7 +13,8 @@ let customers = [
 let correlative = customers.length;
 
 //POST /api/customers => Crear un Cliente
-router.post("/", (req, res) => {  
+router.post("/", (req, res) => {
+  console.log(req.body);
   let id = correlative + 1;
   let firstName = req.body.firstName;
   let lastName = req.body.lastName;
@@ -28,7 +31,7 @@ router.get("/", (req, res) => {
   res.json(customers);
 });
 
-
+//GET /api/customers/:id => Filtrar Cliente por ID
 router.get("/:id", (req, res) => {
   let id = req.params.id;
   let customer = customers.filter(item => item.id == id);
