@@ -7,7 +7,10 @@ let customers = [
   { id: 3, firstName: 'MIRIAM JACKELINE', lastName: 'ALBAN CHUQUIPOMA', documentType: 'DNI', documentNumber: '18195497' },
   { id: 4, firstName: 'ASTRID VANESA ELLY', lastName: 'AMANQUI CONDORI', documentType: 'DNI', documentNumber: '72664197' }
 ];
+
 let correlative = customers.length;
+
+let response = { message: '', success: true, data: null };
 
 //POST /api/customers => Crear un Cliente
 router.post("/", (req, res) => {
@@ -19,8 +22,10 @@ router.post("/", (req, res) => {
   let documentNumber = req.body.documentNumber;
   let customer = { id: correlative, firstName: firstName, lastName: lastName, documentType: documentType, documentNumber: documentNumber };
   customers.push(customer);
-  
-  res.json(customer);
+  response.message = 'El registro fue creado con éxito.';
+  response.success = true;
+  response.data = customer;
+  res.json(response);
 });
 
 //PUT /api/customers => Actualizar un Cliente
@@ -37,24 +42,44 @@ router.put("/:id", (req, res) => {
       break;
     }
   }
-  res.json(customer);
+  response.message = 'El registro fue actualizado con éxito.';
+  response.success = true;
+  response.data = customer;
+  res.json(response);
 });
 
 //DELETE /api/customers => Eliminar un Cliente por ID
 router.delete("/:id", (req, res) => {
-  
+  let id = req.params.id;
+  let customer = customers.filter(item => item.id == id);
+  for(let i = 0; i < customers.length; i++) {
+    if(customers[i].id == id) {
+      customers.splice(i, 1);    
+      break;
+    }
+  }
+  response.message = 'El registro fue eliminado con éxito.';
+  response.success = true;
+  response.data = customer;
+  res.json(response);
 });
 
 //GET /api/customers => Listar Clientes
 router.get("/", (req, res) => {
-  res.json(customers);
+  response.message = 'La consulta fue realizado con éxito.';
+  response.success = true;
+  response.data = customers;
+  res.json(response);
 });
 
 //GET /api/customers/:id => Filtrar Cliente por ID
 router.get("/:id", (req, res) => {
   let id = req.params.id;
   let customer = customers.filter(item => item.id == id);
-  res.json(customer);
+  response.message = 'La consulta fue realizado con éxito.';
+  response.success = true;
+  response.data = customer[0];
+  res.json(response);
 });
 
 module.exports = router;
