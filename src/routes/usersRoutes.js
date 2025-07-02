@@ -14,10 +14,10 @@ let response = { message: '', success: true, data: null };
 router.post("/", (req, res) => {
   correlative++;
   let id = correlative;
-  let roleId = req.body.firstName;
-  let name = req.body.lastName;
-  let email = req.body.documentType;
-  let access = req.body.documentNumber;
+  let roleId = req.body.roleId;
+  let name = req.body.name;
+  let email = req.body.email;
+  let access = req.body.access;
   let indStatus = req.body.indStatus;
   let user = { id: id, roleId: roleId, name: name, email: email, access: access, indStatus: indStatus };
   users.push(user);

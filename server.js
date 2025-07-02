@@ -90,10 +90,10 @@ app.use("/general", generalRoutes);
 // http://google.com/general/acerca_de
 // http://google.com/general/nosotros
 // http://google.com/general/contacto
-app.use("/api/products", productsRoutes);
-app.use("/api/customers", customersRoutes);
-app.use("/api/categories", categoriesRoutes);
-app.use("/api/users", usersRoutes);
+app.use("/api/products", productsRoutes);//APIs para el CRUD de Productos
+app.use("/api/customers", customersRoutes);//APIs para el CRUD de Clientes
+app.use("/api/categories", categoriesRoutes);//APIs para el CRUD de Categorías
+app.use("/api/users", usersRoutes);//APIs para el CRUD de Usuarios
 
 app.listen(process.env.PORT, () => {
   console.log("El proyecto Express funciona!");
