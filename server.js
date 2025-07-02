@@ -38,7 +38,7 @@ app.get("/informe_word", (req, res) => {
   });
   let pObj = docx.createP();
   pObj.addText("Documento Word para el Curso de Desarrollo de Sistemas de Información");
-  res.setHeader('Content-Disposition', 'attachment; filename="generated_document_docx"');
+  res.setHeader('Content-Disposition', 'attachment; filename="josehugo_saraviachavez.docx"');
   res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document');
   docx.generate(res);
 });
@@ -52,12 +52,14 @@ app.get("/informe_excel", (req, res) => {
     console.log(err);
   });
   let sheet = xlsx.makeNewSheet();
-  sheet.name = 'Officegen Excel';
-  sheet.setCell('E7', 42);
-  sheet.setCell('I1', -3);
-  sheet.setCell('I2', 3.1415922653589);
-  sheet.setCell('G102', 'Hello World!');
-  res.setHeader('Content-Disposition', 'attachment; filename="generated_document_xlsx"');
+  sheet.name = 'JSARAVIA';
+  sheet.setCell('B2', 'Curso');
+  sheet.setCell('B3', 'Docente');
+  sheet.setCell('B4', 'Alumno');
+  sheet.setCell('C2', 'Desarrollo de Sistemas de Información');
+  sheet.setCell('C3', 'Ray Leonardo Rojas Enciso');
+  sheet.setCell('C4', 'José Hugo Saravia Chávez');
+  res.setHeader('Content-Disposition', 'attachment; filename="josehugo_saraviachavez.xlsx"');
   res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document');
   xlsx.generate(res);
 });
@@ -65,10 +67,10 @@ app.get("/informe_excel", (req, res) => {
 app.get("/informe_pdf", (req, res) => {
   const doc = new PDFDocument();
   res.setHeader('Content-Type', 'application/pdf');
-  res.setHeader('Content-Disposition', 'attachment; filename="generated_document_pdf"');
+  res.setHeader('Content-Disposition', 'attachment; filename="josehugo_saraviachavez.pdf"');
   doc.pipe(res);
-  doc.fontSize(25).text('Hello from PDFKIT!', 100, 100);
-  doc.text('This is a dynamically generated PDF.', {align: 'center'});
+  doc.fontSize(25).text('Desarrollo de Sistemas de Información', 100, 100);
+  doc.text('Inbcreible pero el Al Hilal eliminó al poderoso Manchester City', {align: 'center'});
   doc.end();
 });
 
