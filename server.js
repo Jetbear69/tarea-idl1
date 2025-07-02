@@ -2,10 +2,15 @@ const express = require("express");
 const app = express();
 const officegen = require("officegen");
 const PDFDocument = require("pdfkit");
+const bodyParser = require("body-parser");
 
 const generalRoutes = require("./src/routes/generalRoutes");
 const productsRoutes = require("./src/routes/productsRoutes");
 const customersRoutes = require("./src/routes/customersRoutes");
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
 
 app.get("/", (req, res) => {
   res.send("Hola Mundo");
