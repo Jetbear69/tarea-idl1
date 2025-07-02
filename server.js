@@ -5,6 +5,7 @@ const PDFDocument = require("pdfkit");
 
 const generalRoutes = require("./src/routes/generalRoutes");
 const productsRoutes = require("./src/routes/productsRoutes");
+const customersRoutes = require("./src/routes/customersRoutes");
 
 app.get("/", (req, res) => {
   res.send("Hola Mundo");
@@ -84,7 +85,7 @@ app.use("/general", generalRoutes);
 // http://google.com/general/contacto
 app.use("/api/products", productsRoutes);
 
-// GET /api/customers => listar
+app.use("/api/customers", customersRoutes);
 // POST /api/customers => crear
 // PUT /api/customers => editar
 // DELETE /api/customers => eliminar
