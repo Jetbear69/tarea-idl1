@@ -86,6 +86,7 @@ app.use("/general", generalRoutes);
 app.use("/api/products", productsRoutes);
 
 app.use("/api/customers", customersRoutes);
+app.use("/api/customer", customersRoutes);
 // POST /api/customers => crear
 // PUT /api/customers => editar
 // DELETE /api/customers => eliminar

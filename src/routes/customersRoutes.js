@@ -14,6 +14,11 @@ router.get("/", (req, res) => {
   res.json(customers);
 });
 
+router.get("/:id", (req, res) => {
+  let customer = customers.filter(item => item.id === req.params.id);
+  res.json(customer);
+});
+
 //POST /api/products => Crear un producto
 router.post("/", (req, res) => {
   
