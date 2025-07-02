@@ -7,6 +7,7 @@ const bodyParser = require("body-parser");
 const generalRoutes = require("./src/routes/generalRoutes");
 const productsRoutes = require("./src/routes/productsRoutes");
 const customersRoutes = require("./src/routes/customersRoutes");
+const categoriesRoutes = require("./src/routes/");
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -91,11 +92,6 @@ app.use("/general", generalRoutes);
 app.use("/api/products", productsRoutes);
 app.use("/api/customers", customersRoutes);
 
-// GET /api/categories => listar
-// POST /api/categories => crear
-// PUT /api/categories => editar
-// DELETE /api/categories => eliminar
-// GET /api/categories/filter => filtrar
 
 // GET /api/users => listar
 // POST /api/users => crear

@@ -28,7 +28,7 @@ router.post("/", (req, res) => {
   res.json(response);
 });
 
-//PUT /api/customers => Actualizar un Cliente
+//PUT /api/customers/:id => Actualizar un Cliente
 router.put("/:id", (req, res) => {
   let id = req.params.id;
   let customer = null;
@@ -48,7 +48,7 @@ router.put("/:id", (req, res) => {
   res.json(response);
 });
 
-//DELETE /api/customers => Eliminar un Cliente por ID
+//DELETE /api/customers/:id => Eliminar un Cliente
 router.delete("/:id", (req, res) => {
   let id = req.params.id;
   let customer = customers.filter(item => item.id == id);
