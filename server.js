@@ -84,6 +84,24 @@ app.use("/general", generalRoutes);
 // http://google.com/general/contacto
 app.use("/api/products", productsRoutes);
 
+// GET /api/customers => listar
+// POST /api/customers => crear
+// PUT /api/customers => editar
+// DELETE /api/customers => eliminar
+// GET /api/customers/filter => filtrar
+
+// GET /api/categories => listar
+// POST /api/categories => crear
+// PUT /api/categories => editar
+// DELETE /api/categories => eliminar
+// GET /api/categories/filter => filtrar
+
+// GET /api/users => listar
+// POST /api/users => crear
+// PUT /api/users => editar
+// DELETE /api/users => eliminar
+// GET /api/users/filter => filtrar
+
 app.listen(process.env.PORT, () => {
   console.log("El proyecto Express funciona!");
 });

@@ -2,6 +2,13 @@ const express = require("express");
 
 const router = express.Router();
 
+let customers = [
+  { id: 1, firstName: 'RICARDO GERMAN', lastName: 'AGIP RUBIO', documentType: 'DNI', documentNumber: '27440013'},
+  { id: 2, firstName: 'CRISTIAN ERICK', lastName: 'ALBA CARRION', documentType: 'DNI', documentNumber: '27440013'},
+  { id: 3, firstName: 'RICARDO GERMAN', lastName: 'AGIP RUBIO', documentType: 'DNI', documentNumber: '27440013'},
+  { id: 4, firstName: 'RICARDO GERMAN', lastName: 'AGIP RUBIO', documentType: 'DNI', documentNumber: '27440013'}
+];
+
 //GET /api/products => Listar productos
 router.get("/", (req, res) => {
   res.json([
