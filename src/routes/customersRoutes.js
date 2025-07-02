@@ -26,15 +26,23 @@ router.post("/", (req, res) => {
 //PUT /api/customers => Actualizar un Cliente
 router.put("/:id", (req, res) => {
   let id = req.params.id;
-  let customer = customers.filter(item => item.id == id);
-  customer.firstName = req.body.firstName;
-  customer.lastName = req.body.lastName;
-  customer.documentType = req.body.documentType;
-  let documentNumber = req.body.documentNumber;
+  let customer = null;
   for(let i = 0; i < customers.length; i++) {
-    
+    if(customers[i].id == id) {
+      customers[i].firstName = req.body.firstName;
+      customers[i].lastName = req.body.lastName;
+      customers[i].documentType = req.body.documentType;
+      customers[i].documentNumber = req.body.documentNumber;
+      customer = customers[i];
+      break;
+    }
   }
-  res.json(customers);
+  res.json(customer);
+});
+
+//DELETE /api/customers => Eliminar un Cliente por ID
+router.delete("/:id", (req, res) => {
+  
 });
 
 //GET /api/customers => Listar Clientes
