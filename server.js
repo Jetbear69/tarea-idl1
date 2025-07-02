@@ -7,7 +7,7 @@ const bodyParser = require("body-parser");
 const generalRoutes = require("./src/routes/generalRoutes");
 const productsRoutes = require("./src/routes/productsRoutes");
 const customersRoutes = require("./src/routes/customersRoutes");
-const categoriesRoutes = require("./src/routes/");
+const categoriesRoutes = require("./src/routes/categoriesRoutes");
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -91,6 +91,7 @@ app.use("/general", generalRoutes);
 // http://google.com/general/contacto
 app.use("/api/products", productsRoutes);
 app.use("/api/customers", customersRoutes);
+app.use("/api/categories", categoriesRoutes);
 
 
 // GET /api/users => listar
