@@ -2,8 +2,6 @@ const express = require("express");
 const app = express();
 const officegen = require("officegen");
 const PDFDocument = require("pdfkit");
-const path = require("path");
-
 
 app.get("/", (req, res) => {
   res.send("Hola Mundo");
@@ -39,7 +37,7 @@ app.get("/informe_word", (req, res) => {
     console.log(err);
   });
   let pObj = docx.createP();
-  pObj.addText("This document was generated on the fly!");
+  pObj.addText("Documento Word para el Curso de Desarrollo de Sistemas de Información");
   res.setHeader('Content-Disposition', 'attachment; filename="generated_document_docx"');
   res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document');
   docx.generate(res);
