@@ -10,73 +10,75 @@ let correlative = users.length;
 
 let response = { message: '', success: true, data: null };
 
-//POST /api/customers => Crear un Cliente
+//POST /api/users => Crear un Usuario
 router.post("/", (req, res) => {
   correlative++;
   let id = correlative;
   let roleId = req.body.firstName;
   let name = req.body.lastName;
-  let documentType = req.body.documentType;
-  let documentNumber = req.body.documentNumber;
-  let customer = { id: correlative, firstName: firstName, lastName: lastName, documentType: documentType, documentNumber: documentNumber };
-  customers.push(customer);
+  let email = req.body.documentType;
+  let access = req.body.documentNumber;
+  let indStatus = req.body.indStatus;
+  let user = { id: id, roleId: roleId, name: name, email: email, access: access, indStatus: indStatus };
+  users.push(user);
   response.message = 'El registro fue creado con éxito.';
   response.success = true;
-  response.data = customer;
+  response.data = user;
   res.json(response);
 });
 
-//PUT /api/customers/:id => Actualizar un Cliente
+//PUT /api/users/:id => Actualizar un Usuario
 router.put("/:id", (req, res) => {
   let id = req.params.id;
-  let customer = null;
-  for(let i = 0; i < customers.length; i++) {
-    if(customers[i].id == id) {
-      customers[i].firstName = req.body.firstName;
-      customers[i].lastName = req.body.lastName;
-      customers[i].documentType = req.body.documentType;
-      customers[i].documentNumber = req.body.documentNumber;
-      customer = customers[i];
+  let user = null;
+  for(let i = 0; i < users.length; i++) {
+    if(users[i].id == id) {
+      users[i].roleId = req.body.roleId;
+      users[i].name = req.body.name;
+      users[i].email = req.body.email;
+      users[i].access = req.body.access;
+      users[i].indStatus = req.body.indStatus;
+      user = users[i];
       break;
     }
   }
   response.message = 'El registro fue actualizado con éxito.';
   response.success = true;
-  response.data = customer;
+  response.data = user;
   res.json(response);
 });
 
-//DELETE /api/customers/:id => Eliminar un Cliente
+//DELETE /api/users/:id => Eliminar un Usuario
 router.delete("/:id", (req, res) => {
   let id = req.params.id;
-  let customer = customers.filter(item => item.id == id);
-  for(let i = 0; i < customers.length; i++) {
-    if(customers[i].id == id) {
-      customers.splice(i, 1);    
+  let user = users.filter(item => item.id == id);
+  for(let i = 0; i < users.length; i++) {
+    if(users[i].id == id) {
+      users.splice(i, 1);    
       break;
     }
   }
   response.message = 'El registro fue eliminado con éxito.';
   response.success = true;
-  response.data = customer;
+  response.data = user;
   res.json(response);
 });
 
-//GET /api/customers => Listar Clientes
+//GET /api/users => Listar Usuarios
 router.get("/", (req, res) => {
   response.message = 'La consulta fue realizado con éxito.';
   response.success = true;
-  response.data = customers;
+  response.data = users;
   res.json(response);
 });
 
-//GET /api/customers/:id => Filtrar Cliente por ID
+//GET /api/users/:id => Filtrar Usuario por ID
 router.get("/:id", (req, res) => {
   let id = req.params.id;
-  let customer = customers.filter(item => item.id == id);
+  let user = users.filter(item => item.id == id);
   response.message = 'La consulta fue realizado con éxito.';
   response.success = true;
-  response.data = customer[0];
+  response.data = user[0];
   res.json(response);
 });
 

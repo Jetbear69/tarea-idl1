@@ -8,6 +8,7 @@ const generalRoutes = require("./src/routes/generalRoutes");
 const productsRoutes = require("./src/routes/productsRoutes");
 const customersRoutes = require("./src/routes/customersRoutes");
 const categoriesRoutes = require("./src/routes/categoriesRoutes");
+const usersRoutes = require("./src/routes/usersRoutes");
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -92,13 +93,7 @@ app.use("/general", generalRoutes);
 app.use("/api/products", productsRoutes);
 app.use("/api/customers", customersRoutes);
 app.use("/api/categories", categoriesRoutes);
-
-
-// GET /api/users => listar
-// POST /api/users => crear
-// PUT /api/users => editar
-// DELETE /api/users => eliminar
-// GET /api/users/filter => filtrar
+app.use("/api/users", usersRoutes);
 
 app.listen(process.env.PORT, () => {
   console.log("El proyecto Express funciona!");
