@@ -85,8 +85,9 @@ app.use("/general", generalRoutes);
 // http://google.com/general/contacto
 app.use("/api/products", productsRoutes);
 
-app.use("/api/customers", customersRoutes);
-app.use("/api/customer", customersRoutes);
+app.use("/api/customers", customersRoutes);//CREAR CLIENTE
+app.use("/api/customers", customersRoutes);//LISTAR CLIENTES
+app.use("/api/customers", customersRoutes);//FILTRAR CLIENTE POR ID
 // POST /api/customers => crear
 // PUT /api/customers => editar
 // DELETE /api/customers => eliminar
