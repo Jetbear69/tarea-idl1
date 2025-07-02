@@ -89,14 +89,7 @@ app.use("/general", generalRoutes);
 // http://google.com/general/nosotros
 // http://google.com/general/contacto
 app.use("/api/products", productsRoutes);
-
-app.use("/api/customers", customersRoutes);//CREAR CLIENTE
-//app.use("/api/customers", customersRoutes);//LISTAR CLIENTES
-//app.use("/api/customers", customersRoutes);//FILTRAR CLIENTE POR ID
-// POST /api/customers => crear
-// PUT /api/customers => editar
-// DELETE /api/customers => eliminar
-// GET /api/customers/filter => filtrar
+app.use("/api/customers", customersRoutes);
 
 // GET /api/categories => listar
 // POST /api/categories => crear
