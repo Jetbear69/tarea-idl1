@@ -3,6 +3,9 @@ const app = express();
 const officegen = require("officegen");
 const PDFDocument = require("pdfkit");
 
+const generalRoutes = require("./src/routes/generalRoutes");
+const productsRoutes = require("./src/routes/productsRoutes");
+
 app.get("/", (req, res) => {
   res.send("Hola Mundo");
 });
@@ -73,6 +76,13 @@ app.get("/informe_pdf", (req, res) => {
   doc.text('Inbcreible pero el Al Hilal eliminó al poderoso Manchester City', {align: 'center'});
   doc.end();
 });
+
+app.use("/general", generalRoutes);
+// http://google.com/general
+// http://google.com/general/acerca_de
+// http://google.com/general/nosotros
+// http://google.com/general/contacto
+app.use("/api/products", productsRoutes);
 
 app.listen(process.env.PORT, () => {
   console.log("El proyecto Express funciona!");
