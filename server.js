@@ -13,24 +13,18 @@ const usersRoutes = require("./src/routes/usersRoutes");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-
 app.get("/", (req, res) => {
-  res.send("Hola Mundo");
+  res.send("Hola Mundo Cruel");
 });
 
 const fnHealth = (req, res) => {
-  res.send("<h1>OK</h1> <strong>funciona!</strong>");
+  res.send("<h1>OK</h1> <strong>funciona el API!</strong>");
 }
 
 app.get("/health", fnHealth);
 
 app.get("/status", (req, res) => {
-  res.json(
-    {
-      "id": 12,
-      "status": "Registrado"
-    }
-  );
+  res.json({ "id": 12, "status": "Registrado" });
 });
 
 app.get("/formato", (req, res) => {
