@@ -27,6 +27,16 @@ app.get("/status", (req, res) => {
   res.json({ "id": 12, "status": "Registrado" });
 });
 
+app.post("/scope/find-code", (req, res) => {
+  console.log(req.body);
+  res.json({
+    "timestamp": "2025-06-01 01:00:00",
+    "status": "OK",
+    "message": "La lista de codigo de autorizacion fue consultado con exito!",
+    "data": ["100402242741", "10040224274"]
+  });
+});
+
 app.get("/formato", (req, res) => {
   let xml = "<respuesta><id>34</id><estado>Registrado</estado></respuesta>".trim();
   res.set("Content-Type", "application/xml");
@@ -88,15 +98,6 @@ app.use("/api/products", productsRoutes);//APIs para el CRUD de Productos
 app.use("/api/customers", customersRoutes);//APIs para el CRUD de Clientes
 app.use("/api/categories", categoriesRoutes);//APIs para el CRUD de Categorías
 app.use("/api/users", usersRoutes);//APIs para el CRUD de Usuarios
-
-app.get("/scope/find-code", (req, res) => {
-  res.send({
-    "timestamp": "2025-06-01 01:00:00",
-    "status": "OK",
-    "message": "La lista de codigo de autorizacion fue consultado con exito!",
-    "data": ["100402242741", "10040224274"]
-  });
-});
 
 app.listen(process.env.PORT, () => {
   console.log("El proyecto Express funciona!");
