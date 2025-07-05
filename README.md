@@ -13,4 +13,14 @@
 
 - URL_BASE: https://dsi-projectapinode-2512054.glitch.me
 - Lista de EndPoints:
-  - GET "/"
+
+| EndPoint       | Method |    Descripción                         |
+|----------------|--------|----------------------------------------|
+| /              | GET    | Contenido de saludo                    |
+| /health        | GET    | Contenido de mensaje de funcionamiento |
+| /status        | GET    | Contenido de estado                    |
+| /formato       | GET    | Contenido de datos XML                 |
+| /informe_word  | GET    | Contenido en un archivo Word           |
+| /informe_excel | GET    | Contenido en un archivo Excel          |
+| /informe_pdf   | GET    | Contenido en un archivo PDF            |
+| /general
