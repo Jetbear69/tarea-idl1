@@ -2,16 +2,18 @@ const express = require("express");
 const pool = require("../../db.js");
 const router = express.Router();
 
+//POST /api/clientes => Crear un Cliente
 router.post("/", async (req, res) => {
-  const { nombre, apellido, cuenta, clave } = req.body;
-  const [result] = await pool.execute("INSERT INTO usuarios(nombre, apellido, cuenta, clave, fecha_creacion, fecha_actualizacion) VALUES(?, ?, ?, ?, NOW(), NOW());", [nombre, apellido, cuenta, clave]);
+  const { rut_sin, nombre, direccion, ciudad, numero_telefono} = req.body;
+  const [result] = await pool.execute("INSERT INTO clientes(rut_sin, nombre, direccion, ciudad, numero_telefono, created_at) VALUES(?, ?, ?, ?, ?, NOW());", [rut_sin, nombre, direccion, ciudad, numero_telefono]);
   res.status(201).json({"message": "Se creo el registro", data: req.body});
 });
 
+//PUT /api/clientes/:id => Actualizar un Cliente
 router.put("/:id", async (req, res) => {
   const { id } = req.params;
-  const { nombre, apellido, cuenta, clave } = req.body;
-  const [result] = await pool.execute("UPDATE usuarios SET nombre = ?, apellido = ?, cuenta = ?, clave = ?, fecha_actualizacion = NOW() WHERE id = ?;", [nombre, apellido, cuenta, clave, id]);
+  const { rut_sin, nombre, direccion, ciudad, numero_telefono} = req.body;
+  const [result] = await pool.execute("UPDATE clientes SET rut_sin = ?, nombre = ?, direccion = ?, ciudad = ?, numero_telefono = ?, updated_at = NOW() WHERE codigo_interno = ?;", [rut_sin, nombre, direccion, ciudad, numero_telefono, id]);
   
   if(result.affectedRows === 0) {
     res.status(404).json({"message": "Se no ha sido encontrado", data: null});
@@ -20,9 +22,10 @@ router.put("/:id", async (req, res) => {
   }
 });
 
+//DELETE /api/clientes/:id => Eliminar un Cliente
 router.delete("/:id", async (req, res) => {
   const { id } = req.params;
-  const [result] = await pool.execute("DELETE FROM usuarios WHERE id = ?;", [id]);
+  const [result] = await pool.execute("DELETE FROM clientes WHERE codigo_interno = ?;", [id]);
   if(result.affectedRows === 0) {
     res.status(404).json({"message": "Se no ha sido encontrado", data: null});
   } else {
@@ -30,15 +33,17 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
+//GET /api/clientes => Listar Clientes
 router.get("/", async (req, res) => {
-  let sql = "select * from usuarios;";
+  let sql = "select * from clientes;";
   const [resultado] = await pool.query(sql);
   res.json(resultado);
 });
 
+//GET /api/clientes/:id => Filtrar Cliente por ID
 router.get("/:id", async (req, res) => {
   let id = req.params.id;
-  let sql = "select * from usuarios WHERE id = " + id + ";";
+  let sql = "select * from clientes WHERE codigo_interno = " + id + ";";
   const [resultado] = await pool.query(sql);
   res.json(resultado[0]);
 });

@@ -15,7 +15,8 @@
     "fastify": "^4.21.0",
     "handlebars": "^4.7.8",
     "officegen": "^0.6.5",
-    "pdfkit": "^0.17.1"
+    "pdfkit": "^0.17.1",
+    "mysql2": "^3.14.1"
   },
   "engines": {
     "node": "14.x"

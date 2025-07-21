@@ -1,91 +1,46 @@
 const express = require("express");
+const pool = require("../../db.js");
 const router = express.Router();
 
-let categories = [
-  { id: 1, categoryId: 0, name: 'Categoría DGALA', description: 'Categoría DGALA', linkImage: '', indLevel: 0, indStatus: true },
-  { id: 2, categoryId: 1, name: 'Aretes', description: 'Aretes', linkImage: 'categories/aretes.png', indLevel: 1, indStatus: true },
-  { id: 3, categoryId: 1, name: 'Candongas', description: 'Candongas', linkImage: 'categories/candongas.png', indLevel: 1, indStatus: true },
-  { id: 4, categoryId: 1, name: 'Dijes', description: 'Dijes', linkImage: 'categories/dijes.png', indLevel: 1, indStatus: true },
-  { id: 5, categoryId: 1, name: 'Pulseras', description: 'Pulseras', linkImage: 'categories/pulseras.png', indLevel: 1, indStatus: true },
-  { id: 6, categoryId: 1, name: 'Cadenas', description: 'Cadenas', linkImage: 'categories/cadenas.png', indLevel: 1, indStatus: true },
-];
-
-let correlative = categories.length;
-
-let response = { message: '', success: true, data: null };
-
-//POST /api/categories => Crear una Categoría
-router.post("/", (req, res) => {
-  correlative++;
-  let id = correlative;
-  let categoryId = req.body.categoryId;
-  let name = req.body.name;
-  let description = req.body.description;
-  let linkImage = req.body.linkImage;
-  let indLevel = req.body.indLevel;
-  let indStatus = req.body.indStatus;
-  let category = { id: correlative, categoryId: categoryId, name: name, description: description, linkImage: linkImage, indLevel: indLevel, indStatus: indStatus };
-  categories.push(category);
-  response.message = 'El registro fue creado con éxito.';
-  response.success = true;
-  response.data = category;
-  res.json(response);
+router.post("/", async (req, res) => {
+  const { nombre } = req.body;
+  const [result] = await pool.execute("INSERT INTO categorias(nombre, fecha_creacion, fecha_actualizacion) VALUES('" + nombre + "', NOW(), NOW());");
+  res.status(201).json({"message": "Se creo el registro", data: req.body});
 });
 
-//PUT /api/categories/:id => Actualizar una Categoría
-router.put("/:id", (req, res) => {
-  let id = req.params.id;
-  let category = null;
-  for(let i = 0; i < categories.length; i++) {
-    if(categories[i].id == id) {
-      categories[i].categoryId = req.body.categoryId;
-      categories[i].name = req.body.name;
-      categories[i].description = req.body.description;
-      categories[i].linkImage = req.body.linkImage;
-      categories[i].indLevel = req.body.indLevel;
-      categories[i].indStatus = req.body.indStatus;
-      category = categories[i];
-      break;
-    }
+router.put("/:id", async (req, res) => {
+  const { id } = req.params;
+  const { nombre } = req.body;
+  const [result] = await pool.execute("UPDATE categorias SET nombre = ?, fecha_actualizacion = NOW() WHERE id = ?;", [nombre, id]);
+  
+  if(result.affectedRows === 0) {
+    res.status(404).json({"message": "Se no ha sido encontrado", data: null});
+  } else {
+    res.status(200).json({"message": "Se actualizo el registro", data: req.body});
   }
-  response.message = 'El registro fue actualizado con éxito.';
-  response.success = true;
-  response.data = category;
-  res.json(response);
 });
 
-//DELETE /api/categories/:id => Eliminar una Categoría
-router.delete("/:id", (req, res) => {
-  let id = req.params.id;
-  let category = categories.filter(item => item.id == id);
-  for(let i = 0; i < categories.length; i++) {
-    if(categories[i].id == id) {
-      categories.splice(i, 1);    
-      break;
-    }
+router.delete("/:id", async (req, res) => {
+  const { id } = req.params;
+  const [result] = await pool.execute("DELETE FROM categorias WHERE id = ?;", [id]);
+  if(result.affectedRows === 0) {
+    res.status(404).json({"message": "Se no ha sido encontrado", data: null});
+  } else {
+    res.status(200).json({"message": "Se elimino el registro", data: null});
   }
-  response.message = 'El registro fue eliminado con éxito.';
-  response.success = true;
-  response.data = category;
-  res.json(response);
 });
 
-//GET /api/categorues => Listar Categorías
-router.get("/", (req, res) => {
-  response.message = 'La consulta fue realizado con éxito.';
-  response.success = true;
-  response.data = categories;
-  res.json(response);
+router.get("/", async (req, res) => {
+  let sql = "select * from categorias;";
+  const [resultado] = await pool.query(sql);
+  res.json(resultado);
 });
 
-//GET /api/categories/:id => Filtrar Categoría por ID
-router.get("/:id", (req, res) => {
+router.get("/:id", async (req, res) => {
   let id = req.params.id;
-  let category = categories.filter(item => item.id == id);
-  response.message = 'La consulta fue realizado con éxito.';
-  response.success = true;
-  response.data = category[0];
-  res.json(response);
+  let sql = "select * from categorias WHERE id = " + id + ";";
+  const [resultado] = await pool.query(sql);
+  res.json(resultado[0]);
 });
 
 module.exports = router;
