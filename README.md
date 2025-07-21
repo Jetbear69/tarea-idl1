@@ -11,8 +11,6 @@
 
 ## Contenido del Proyecto
 
-- URL_BASE: **https://dsi-projectapinode-2512054.glitch.me**
-
 #### Lista de EndPoints:
 
 | EndPoint           | Method |    Descripción                         |
